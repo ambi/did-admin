@@ -1,4 +1,4 @@
-import { List, Show, Datagrid, TextField, SimpleShowLayout } from "react-admin";
+import { List, Show, Create, Datagrid, TextField, SimpleShowLayout, SimpleForm, ReferenceInput, TextInput, ArrayInput, SimpleFormIterator } from "react-admin";
 import { RefField, JwtField } from "./fields";
 
 export const PresentationRequestList = () => (
@@ -23,4 +23,20 @@ export const PresentationRequestShow = () => (
       <JwtField source="presentationRequestJwt" />
     </SimpleShowLayout>
   </Show>
+);
+
+export const PresentationRequestCreate = () => (
+  <Create>
+    <SimpleForm>
+      <TextInput source="issuerId" />
+      <TextInput source="issuerKid" />
+      <ReferenceInput source="presentationDefinitionId" reference="presentation_definitions" />
+      <ArrayInput source="audience">
+        <SimpleFormIterator inline>
+          <TextInput source="url" />
+        </SimpleFormIterator>
+      </ArrayInput>
+      <TextInput source="expiration" />
+    </SimpleForm>
+  </Create>
 );

@@ -1,4 +1,4 @@
-import { List, Show, Datagrid, TextField, BooleanField, SimpleShowLayout } from "react-admin";
+import { List, Show, Create, Datagrid, TextField, BooleanField, SimpleShowLayout, SimpleForm, RadioButtonGroupInput } from "react-admin";
 
 export const OperationList = () => (
   <List>

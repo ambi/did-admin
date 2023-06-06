@@ -1,4 +1,4 @@
-import { List, Show, Datagrid, TextField, SimpleShowLayout } from "react-admin";
+import { List, Show, Create, Datagrid, TextField, SimpleShowLayout, SimpleForm, ReferenceInput, TextInput, ArrayInput, SimpleFormIterator, SelectInput } from "react-admin";
 import { JsonField } from "./fields";
 
 export const SchemaList = () => (
@@ -21,4 +21,25 @@ export const SchemaShow = () => (
       <JsonField source="schema.schema" />
     </SimpleShowLayout>
   </Show>
+);
+
+// https://developer.tbd.website/docs/apis/ssi-service/#tag/SchemaAPI/paths/~1v1~1schemas/put
+export const SchemaCreate = () => (
+  <Create>
+    <SimpleForm>
+      <ReferenceInput source="issuer" reference="dids" />
+      <TextInput source="issuerKid" />
+      <TextInput source="name" />
+      <ArrayInput source="schema">
+        <SimpleFormIterator inline>
+          <TextInput source="name" />
+          <SelectInput source="type" defaultValue="string" choices={[
+            { id: 'string', name: 'string' },
+            { id: 'number', name: 'number' },
+            { id: 'boolean', name: 'boolean' },
+          ]} />
+        </SimpleFormIterator>
+      </ArrayInput>
+    </SimpleForm>
+  </Create>
 );
